@@ -1,0 +1,37 @@
+{
+  "commands": {
+    "%2FUsers%2Flordon": [
+      " q"
+    ]
+  },
+  "extensions": {
+    "%2FUsers%2Flordon%2F": {
+      "config%2Fcoc%2Fextensions": [
+        " q q"
+      ]
+    }
+  },
+  "marketplace": {
+    "%2FUsers%2Flordon%2F": {
+      "config%2Fcoc%2Fextensions": [
+        " ",
+        "：：：::cjjjjjjju",
+        " q"
+      ]
+    }
+  },
+  "todolist": {
+    "%2FUsers%2Flordon%2F": {
+      "config%2Fcoc%2Fextensions%2Fnode_modules%2Fcoc-todolist": [
+        "kj q"
+      ]
+    }
+  },
+  "bookmark": {
+    "%2FUsers%2Flordon%2F": {
+      "config%2Fcoc%2Fextensions": [
+        " "
+      ]
+    }
+  }
+}
