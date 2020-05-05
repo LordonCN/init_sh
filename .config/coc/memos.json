@@ -30,7 +30,7 @@
         "sysPrefix": "/System/Library/Frameworks/Python.framework/Versions/2.7",
         "fileHash": "974c6aba36b2c99df606e1194209299d7554af295d4b6038ef2527efb0c86bddd871aae18406897a7b1da5c2e539e85a1513bd18c59b6a40d2c1143507df5f7e"
       },
-      "expiry": 1588661758038
+      "expiry": 1588750425227
     },
     "/usr/bin/python2.7.v3": {
       "data": {
@@ -55,7 +55,7 @@
         "sysPrefix": "/System/Library/Frameworks/Python.framework/Versions/2.7",
         "fileHash": "a52c3d799ad987d0b1d9d25304358a601a1d7ead921fbf3fcdb22089b277db51929fee447c157b004406359882ab84af612665112c058e7e89384184eea67c9c"
       },
-      "expiry": 1588661758039
+      "expiry": 1588750425225
     },
     "INTERPRETERS_CACHE_v3_KnownPathsService": [
       {
@@ -315,25 +315,25 @@
       },
       {
         "architecture": 3,
-        "path": "/usr/local/opt/python/bin/python3.7",
+        "path": "/usr/bin/python",
         "version": {
           "options": {
             "loose": false,
             "includePrerelease": false
           },
           "loose": false,
-          "raw": "3.7.7-final",
-          "major": 3,
+          "raw": "2.7.10-final",
+          "major": 2,
           "minor": 7,
-          "patch": 7,
+          "patch": 10,
           "prerelease": [
             "final"
           ],
           "build": [],
-          "version": "3.7.7-final"
+          "version": "2.7.10-final"
         },
-        "sysPrefix": "/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7",
-        "fileHash": "9a5b3ca97e45657edead73d00d2befbb36ad6a01e22be03e96bfc5d4766906e4c3409c7d111f1139c5c4e2252aebc0af5ea7ec995dce506755610a0532d775a2",
+        "sysPrefix": "/System/Library/Frameworks/Python.framework/Versions/2.7",
+        "fileHash": "974c6aba36b2c99df606e1194209299d7554af295d4b6038ef2527efb0c86bddd871aae18406897a7b1da5c2e539e85a1513bd18c59b6a40d2c1143507df5f7e",
         "type": "Unknown"
       }
     ],
@@ -358,7 +358,8 @@
       },
       "sysPrefix": "/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7",
       "fileHash": "9a5b3ca97e45657edead73d00d2befbb36ad6a01e22be03e96bfc5d4766906e4c3409c7d111f1139c5c4e2252aebc0af5ea7ec995dce506755610a0532d775a2",
-      "type": "Unknown"
+      "type": "Unknown",
+      "cachedEntry": true
     },
     "PipEnvInformation": [],
     "preferredGlobalPyInterpreter": {
@@ -391,7 +392,7 @@
         "displayName": "Python 2.7.10 64-bit",
         "hash": "974c6aba36b2c99df606e1194209299d7554af295d4b6038ef2527efb0c86bddd871aae18406897a7b1da5c2e539e85a1513bd18c59b6a40d2c1143507df5f7e-9a268a2ebd3a247de73a4b5e6fa4c209"
       },
-      "expiry": 1588661758213
+      "expiry": 1588750425299
     },
     "InterpreterAutoSeletionRule-system": {
       "architecture": 3,
@@ -415,6 +416,7 @@
       "sysPrefix": "/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7",
       "fileHash": "9a5b3ca97e45657edead73d00d2befbb36ad6a01e22be03e96bfc5d4766906e4c3409c7d111f1139c5c4e2252aebc0af5ea7ec995dce506755610a0532d775a2",
       "type": "Unknown",
+      "cachedEntry": true,
       "displayName": "Python 3.7.7 64-bit"
     },
     "/usr/bin/python.interpreter.Details.v7": {
@@ -445,7 +447,7 @@
           "displayName": "Python 2.7.10 64-bit"
         }
       },
-      "expiry": 1588661758223
+      "expiry": 1588750425308
     },
     "pylint_DisableLinterInstallPrompt": true,
     "ProposeLSBanner": false,
@@ -471,7 +473,6 @@
       "sysPrefix": "/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7",
       "fileHash": "9a5b3ca97e45657edead73d00d2befbb36ad6a01e22be03e96bfc5d4766906e4c3409c7d111f1139c5c4e2252aebc0af5ea7ec995dce506755610a0532d775a2",
       "type": "Unknown",
-      "cachedEntry": true,
       "displayName": "Python 3.7.7 64-bit"
     },
     "GLOBAL_DIAGNOSTICS_FILTER": [
@@ -500,7 +501,7 @@
         "sysPrefix": "/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7",
         "fileHash": "6b4e87c915e994963ecebb45e735eaa9ecfe2f123bdf890f17bf386c708a7731147b2914517f834705c16ac97f33000582fc93220549078d8853ec7015b72f06"
       },
-      "expiry": 1588661758053
+      "expiry": 1588750425227
     },
     "/usr/local/bin/python3.v3": {
       "data": {
@@ -525,7 +526,7 @@
         "sysPrefix": "/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7",
         "fileHash": "b8b722b07def2d6d388468fde084863e86a021cdcb562cc2db9dfe38dd8a3b8d254eb839ec02497c7eea51b901f8cd689110342d9824b777499a71e925af28a8"
       },
-      "expiry": 1588661758070
+      "expiry": 1588750425225
     },
     "/usr/local/opt/python/bin/python3.7.v3": {
       "data": {
@@ -550,21 +551,21 @@
         "sysPrefix": "/usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7",
         "fileHash": "9a5b3ca97e45657edead73d00d2befbb36ad6a01e22be03e96bfc5d4766906e4c3409c7d111f1139c5c4e2252aebc0af5ea7ec995dce506755610a0532d775a2"
       },
-      "expiry": 1588661758147
+      "expiry": 1588750425223
     },
     "/usr/local/bin/python3.interpreter.displayName.v7": {
       "data": {
         "displayName": "Python 3.7.7 64-bit",
         "hash": "b8b722b07def2d6d388468fde084863e86a021cdcb562cc2db9dfe38dd8a3b8d254eb839ec02497c7eea51b901f8cd689110342d9824b777499a71e925af28a8-7e4d87ce924c5df4b82a7b851d2ee345"
       },
-      "expiry": 1588661758212
+      "expiry": 1588750425298
     },
     "/usr/local/opt/python/bin/python3.7.interpreter.displayName.v7": {
       "data": {
         "displayName": "Python 3.7.7 64-bit",
         "hash": "9a5b3ca97e45657edead73d00d2befbb36ad6a01e22be03e96bfc5d4766906e4c3409c7d111f1139c5c4e2252aebc0af5ea7ec995dce506755610a0532d775a2-31ceb79d4406935f795979812654a457"
       },
-      "expiry": 1588661758214
+      "expiry": 1588750425300
     },
     "/usr/local/bin/python3.interpreter.Details.v7": {
       "data": {
@@ -594,7 +595,7 @@
           "displayName": "Python 3.7.7 64-bit"
         }
       },
-      "expiry": 1588661758220
+      "expiry": 1588750425305
     },
     "/usr/local/opt/python/bin/python3.7.interpreter.Details.v7": {
       "data": {
@@ -624,7 +625,7 @@
           "displayName": "Python 3.7.7 64-bit"
         }
       },
-      "expiry": 1588661758225
+      "expiry": 1588750425310
     }
   },
   "coc-python|/Users/lordon": {

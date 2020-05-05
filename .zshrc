@@ -2,10 +2,11 @@
 #" Author:Lordon 
 #" Blog: http://Tcloser.github.io
 #" Version: v2.2
-#" Update Time: 2020-04-19
-#" Details:change rm to mv. more safe.
+#" Update Time: 2020-05-05
+#" Details:change vim8.2
 #""""""""""""""""""""""
 export ZSH=$HOME/.oh-my-zsh
+export LC_ALL=en_US.UTF-8
 # every time rl auto clear the window
 clear
 # welcome
@@ -51,11 +52,10 @@ alias shutdown='sudo shutdown -h now'
 # source ~/.zshrc
 alias rl="source ~/.zshrc"
 alias cp="cp -i"
-
 # open dash 
 alias dash='open dash://'
-
-
+# change vim8.2 installed by homebrew
+alias vim='/usr/local/Cellar/vim/8.2.0400/bin/vim'
 
 
 
