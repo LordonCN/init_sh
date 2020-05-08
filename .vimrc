@@ -1,48 +1,44 @@
-""""""""""""""""""""""
+":"""""""""""""""""""""
 " Author:Lordon 
 " Blog: http://Tcloser.github.io
 " Version: v2.5
-" Update Time: 2020-05-05
-" Details: add windowui and change vim8.2
+" Update Time: 2020-05-06
+" Details: add leader+y change the folder of nerdtree 
+" and update the todo use, make it smart 
 """"""""""""""""""""""
-
-" 设置leader按键为空格
+"🌟设置leader按键为空格
 let mapleader = "\<space>"
 set visualbell
 set autoread
 
-
-""""""""""""""""""""""
-" normal mode 
-"""""""""""""""""""""""
 nmap <leader>w :w!<cr>
 nmap <leader>q :q!<cr> 
 nmap <leader>s :Startify<cr>
+"🌟打开目录树 y定位到当前目录
 nmap <leader>t :NERDTreeToggle<cr>
+nnoremap <silent> <Leader>y :NERDTreeFind<CR>
+
 "coc bookmark config
 nmap <leader>b :CocList bookmark<cr>
-nmap <leader>bn :CocCommand bookmark.annotate <cr>
 "开新标签
 nmap <leader>n :tabnew<cr>        
 "开ui界面导航 
-nnoremap <silent><space><space> :call quickui#menu#open()<cr>
-
-""""""""""""""""""""""
-" INSERT model 
-""""""""""""""""""""""
-"快捷生成TODO
-imap <C-t> <!--TODO--> <cr>
-"exit  insert  to normal use jj 
+nnoremap <silent><space>r :call quickui#menu#open()<cr>
+"🌟exit  insert  to normal use jj 
 imap jj <Esc>`^
-
+"快捷生成TODO change todo and to insert mode
+imap <C-t> <!--TODO--> jj7hdwi
 
 """"""""""""""""""""""
 " 设置vim scheme
 """"""""""""""""""""""
 "highlight Comment ctermbg=Black  ctermfg=White
-highlight Normal ctermbg=Black
+"highlight Normal ctermbg=Black
 " this next line is needed to enable your custom colors:
 colorscheme pablo
+set background=dark
+"colorscheme gruvbox
+"set background=dark
 syntax enable
 syntax on
 set autoread
@@ -78,8 +74,10 @@ set nowrap "禁止折行
 filetype indent on
 set list lcs=tab:>-
 set tabstop=4
-set t_Co=128
-
+set t_Co=256
+" leaderf autochange dir 
+"set autochdir
+autocmd BufEnter * silent! lcd %:p:h
 """"""""""""""""""""""
 " ---------Plug-------------
 """"""""""""""""""""""
@@ -89,6 +87,7 @@ Plug 'mhinz/vim-startify' 						"welcome
 Plug 'tpope/vim-fugitive' 						"Git 插件
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
 Plug 'luochen1990/rainbow'  					"括号不同颜色
 Plug 'dense-analysis/ale' 						"语法检查
 Plug 'Yggdroot/LeaderF', {'do': './install.sh'} "模糊搜索
@@ -106,18 +105,19 @@ let airline#extensions#coc#warning_symbol = 'Warning:'
 let g:airline#extensions#tabline#enabled = 1
 
 function! AccentDemo()
-  let keys = ['a','b','c','d','e','f','g','h']
+  let keys = ['N','E','U','L','o','r','d','o','n']
   for k in keys
     call airline#parts#define_text(k, k)
   endfor
-  call airline#parts#define_accent('a', 'red')
-  call airline#parts#define_accent('b', 'green')
-  call airline#parts#define_accent('c', 'blue')
-  call airline#parts#define_accent('d', 'yellow')
-  call airline#parts#define_accent('e', 'orange')
-  call airline#parts#define_accent('f', 'purple')
-  call airline#parts#define_accent('g', 'bold')
-  call airline#parts#define_accent('h', 'italic')
+  call airline#parts#define_accent('N', 'red')
+  call airline#parts#define_accent('E', 'green')
+  call airline#parts#define_accent('U', 'blue')
+  call airline#parts#define_accent('L', 'purple')
+  call airline#parts#define_accent('o', 'orange')
+  call airline#parts#define_accent('r', 'purple')
+  call airline#parts#define_accent('d', 'bold')
+  call airline#parts#define_accent('o', 'red')
+  call airline#parts#define_accent('n', 'italic')
   let g:airline_section_a = airline#section#create(keys)
 endfunction
 autocmd VimEnter * call AccentDemo()
@@ -143,10 +143,8 @@ let g:Lf_WorkingDirectoryMode = 1
 " nerdtree settings leader+f :search for files
 """"""""""""""""""""""
 nnoremap <leader>f :nerdtreefind<cr>
-" leader+t :open nerdtree
-"nnoremap <leader>t :nerdtreetoggle<cr>
 let nerdtreewinsize=30
-
+let g:NERDTreeChDirMode = 2
 
 """"""""""""""""""""""
 " Plug-----缩进可视化插件 Indent Guides
@@ -227,24 +225,21 @@ func SetTitle_()
    autocmd BufNewFile * normal G
 endfunc 
 
+
 call quickui#menu#reset()
 let g:quickui_color_scheme = 'gruvbox'
 call quickui#menu#install("&File", [
-			\ [ "&Open&New&File", 'call feedkeys(":tabe ")'],
+			\ [ "&Open/NewFile", 'call feedkeys(":tabe ")'],
 			\ [ "&Save\t(:w)", 'write'],
-			\ [ "--", ],
-			\ [ "LeaderF &File", 'Leaderf file', 'Open file with leaderf'],
-			\ [ "LeaderF &Mru", 'Leaderf mru --regexMode', 'Open recently accessed files'],
-			\ [ "LeaderF &Buffer", 'Leaderf buffer', 'List current buffers in leaderf'],
+		\ [ "--", ],
+			\ [ "&New Bookmark", 'CocCommand bookmark.annotate'],
+			\ [ "&List Bookmark", 'CocList bookmark'],
+		\ [ "--", ],
+			\ [ "LeadF &File", 'Leaderf file', 'Open file with leaderf'],
+			\ [ "LeadF &Mru", 'Leaderf mru --regexMode', 'Open recently accessed files'],
+			\ [ "LeadF &Buffer", 'Leaderf buffer', 'List current buffers in leaderf'],
 			\ [ "--", ],
 			\ [ "E&xit", 'qa' ],
-			\ ])
-
-call quickui#menu#install('&Move', [
-			\ ["Quickfix &First\t:cfirst", 'cfirst', 'quickfix cursor rewind'],
-			\ ["Quickfix L&ast\t:clast", 'clast', 'quickfix cursor to the end'],
-			\ ["Quickfix &Next\t:cnext", 'cnext', 'cursor next'],
-			\ ["Quickfix &Previous\t:cprev", 'cprev', 'quickfix cursor previous'],
 			\ ])
 
 " todo change coc-git command 
@@ -265,9 +260,10 @@ call quickui#menu#install('&Tools', [
 
 call quickui#menu#install('&Plugin', [
 			\ ["&NERDTree\t<space>t", 'NERDTreeToggle', 'toggle nerdtree'],
+			\ ["-"],
+			\ ['&Source vimrc','source ~/.vimrc'],
 			\ ['&PlugInstall','PlugInstall'],
 			\ ["-"],
-			\ ["Plugin &List", "PlugList", "Update list"],
 			\ ["Plugin &Update", "PlugUpdate", "Update plugin"],
 			\ ])
 
@@ -305,9 +301,6 @@ let g:context_menu_k = [
 			\ ['Cpp&man', 'exec "Cppman " . expand("<cword>")', '', 'c,cpp'],
 			\ ['P&ython Doc', 'call quickui#tools#python_help("")', 'python'],
 			\ ]
-
-
-
 
 " display vim messages in the textbox
 function! DisplayMessages()

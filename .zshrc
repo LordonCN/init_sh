@@ -6,6 +6,7 @@
 #" Details:change vim8.2
 #""""""""""""""""""""""
 export ZSH=$HOME/.oh-my-zsh
+#source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette_osx.sh" 
 export LC_ALL=en_US.UTF-8
 # every time rl auto clear the window
 clear
@@ -56,6 +57,6 @@ alias cp="cp -i"
 alias dash='open dash://'
 # change vim8.2 installed by homebrew
 alias vim='/usr/local/Cellar/vim/8.2.0400/bin/vim'
-
+alias nvim='/usr/local/Cellar/neovim/0.4.3/bin/nvim'
 
 
