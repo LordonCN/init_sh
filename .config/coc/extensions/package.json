@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "coc-bookmark": ">=1.0.4",
-    "coc-imselect": ">=0.0.12",
-    "coc-json": ">=1.2.5",
-    "coc-marketplace": ">=1.7.0",
-    "coc-python": ">=1.2.12"
-  }
-}
