@@ -1,10 +1,9 @@
-":"""""""""""""""""""""
+""""""""""""""""""""""
 " Author:Lordon 
 " Blog: http://Tcloser.github.io
-" Version: v2.5
-" Update Time: 2020-05-06
-" Details: add leader+y change the folder of nerdtree 
-" and update the todo use, make it smart 
+" Version: v3.0
+" Update Time: 2020-05-11
+" Details:add dd dc dp to satisfy my hobby
 """"""""""""""""""""""
 "🌟设置leader按键为空格
 let mapleader = "\<space>"
@@ -13,34 +12,37 @@ set autoread
 
 nmap <leader>w :w!<cr>
 nmap <leader>q :q!<cr> 
+" delete one word --learn from book
+nmap <leader>dd daw 
+nmap <leader>dc caw 
+nmap <leader>dp C
 nmap <leader>s :Startify<cr>
 "🌟打开目录树 y定位到当前目录
 nmap <leader>t :NERDTreeToggle<cr>
 nnoremap <silent> <Leader>y :NERDTreeFind<CR>
-
-"coc bookmark config
+"🌟coc bookmark config
 nmap <leader>b :CocList bookmark<cr>
 "开新标签
-nmap <leader>n :tabnew<cr>        
-"开ui界面导航 
+"nmap <leader>n :tabnew<cr>        
+"开ui导航 
 nnoremap <silent><space>r :call quickui#menu#open()<cr>
-"🌟exit  insert  to normal use jj 
+"🌟exit  insert model to normal use jj 
 imap jj <Esc>`^
 "快捷生成TODO change todo and to insert mode
 imap <C-t> <!--TODO--> jj7hdwi
-
 """"""""""""""""""""""
 " 设置vim scheme
 """"""""""""""""""""""
 "highlight Comment ctermbg=Black  ctermfg=White
 "highlight Normal ctermbg=Black
 " this next line is needed to enable your custom colors:
-colorscheme pablo
+
+colorscheme gruvbox
 set background=dark
-"colorscheme gruvbox
-"set background=dark
 syntax enable
 syntax on
+" no swap
+set noswapfile
 set autoread
 "搜索高亮
 set hlsearch
@@ -104,6 +106,9 @@ let airline#extensions#coc#error_symbol = 'Error:'
 let airline#extensions#coc#warning_symbol = 'Warning:'
 let g:airline#extensions#tabline#enabled = 1
 
+""""""""""""""""""""""
+" Show the name
+""""""""""""""""""""""
 function! AccentDemo()
   let keys = ['N','E','U','L','o','r','d','o','n']
   for k in keys
@@ -242,18 +247,13 @@ call quickui#menu#install("&File", [
 			\ [ "E&xit", 'qa' ],
 			\ ])
 
-" todo change coc-git command 
-call quickui#menu#install("&Git", [
-			\ ['&View Diff', 'call svnhelp#svn_diff("%")'],
-			\ ['&Show Log', 'call svnhelp#svn_log("%")'],
-			\ ['File &Add', 'call svnhelp#svn_add("%")'],
-			\ ])
-
 call quickui#menu#install('&Tools', [
-			\ ['List &Buffer', 'call quickui#tools#list_buffer("FileSwitch tabe")', ],
+			\ ['List &Buffer', 'call quickui#tools#list_buffer("tabe")', ],
+			\ ['New &Buffer', 'call quickui#tools#buffer_switch("tabe")', ],
+			\ ['--',''],
+			\ ['Show &Gitcommit', 'CocCommand git.showCommit', ],
 			\ ['Display &Messages', 'call quickui#tools#display_messages()', ],
 			\ ['--',''],
-			\ ["&DelimitMate %{get(b:, 'delimitMate_enabled', 0)? 'Disable':'Enable'}", 'DelimitMateSwitch'],
 			\ ['&Spell %{&spell? "Disable":"Enable"}', 'set spell!', 'Toggle spell check %{&spell? "off" : "on"}'],
 			\ ["Relati&ve number %{&relativenumber? 'OFF':'ON'}", 'set relativenumber!'],
 			\ ])

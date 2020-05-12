@@ -11,7 +11,7 @@ export LC_ALL=en_US.UTF-8
 # every time rl auto clear the window
 clear
 # welcome
-echo -e "Hello, `whoami`  |  `date`
+echo -e "Hello, `whoami`  | Today is `date`
  __    _____  ____  ____  _____  _  _ 
 (  )  (  _  )(  _ \(  _ \(  _  )( \( )
  )(__  )(_)(  )   / )(_) ))(_)(  )  ( 
@@ -23,7 +23,6 @@ echo -e "Hello, `whoami`  |  `date`
               ||----w||
               ||     ||
 
-Hope you can enjoy today~ 
 If you want to grow, you need to suffer more :)"
 
 ZSH_THEME="af-magic"
@@ -56,7 +55,7 @@ alias cp="cp -i"
 # open dash 
 alias dash='open dash://'
 # change vim8.2 installed by homebrew
-alias vim='/usr/local/Cellar/vim/8.2.0400/bin/vim'
-alias nvim='/usr/local/Cellar/neovim/0.4.3/bin/nvim'
+alias vim8='/usr/local/Cellar/vim/8.2.0400/bin/vim'
+alias vim='/usr/local/Cellar/neovim/0.4.3/bin/nvim'
 
 
