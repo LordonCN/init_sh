@@ -2,21 +2,23 @@
 " Author:Lordon 
 " Blog: http://Tcloser.github.io
 " Version: v3.0
-" Update Time: 2020-05-11
-" Details:add dd dc dp to satisfy my hobby
+" Update Time: 2020-05-21
+" Details: add the settings of popup leader
 """"""""""""""""""""""
 "🌟设置leader按键为空格
 let mapleader = "\<space>"
 set visualbell
 set autoread
 
-nmap <leader>w :w!<cr>
-nmap <leader>q :q!<cr> 
-" delete one word --learn from book
-nmap <leader>dd daw 
-nmap <leader>dc caw 
-nmap <leader>dp C
 nmap <leader>s :Startify<cr>
+nmap <leader>w :w!<cr>
+nmap <leader>qq :q!<cr> 
+" delete one word --learn from book
+" nmap <leader>dd daw 
+" nmap <leader>dc caw 
+" nmap <leader>dp C
+" change buffer tabe
+nmap <leader>n :bn<cr>
 "🌟打开目录树 y定位到当前目录
 nmap <leader>t :NERDTreeToggle<cr>
 nnoremap <silent> <Leader>y :NERDTreeFind<CR>
@@ -33,10 +35,7 @@ imap <C-t> <!--TODO--> jj7hdwi
 """"""""""""""""""""""
 " 设置vim scheme
 """"""""""""""""""""""
-"highlight Comment ctermbg=Black  ctermfg=White
-"highlight Normal ctermbg=Black
 " this next line is needed to enable your custom colors:
-
 colorscheme gruvbox
 set background=dark
 syntax enable
@@ -55,9 +54,6 @@ set ruler
 set incsearch
 "不区分大小写搜索
 set ignorecase
-"智能缩进
-set smartindent
-set foldmethod=indent
 "显示出输入的命令
 set showcmd 
 set encoding=utf-8
@@ -77,11 +73,11 @@ filetype indent on
 set list lcs=tab:>-
 set tabstop=4
 set t_Co=256
-" leaderf autochange dir 
-"set autochdir
+set autochdir
 autocmd BufEnter * silent! lcd %:p:h
+
 """"""""""""""""""""""
-" ---------Plug-------------
+" ---------Plug box-------------
 """"""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree' 						"左侧目录树
@@ -89,7 +85,7 @@ Plug 'mhinz/vim-startify' 						"welcome
 Plug 'tpope/vim-fugitive' 						"Git 插件
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'							"当前主题很喜欢
 Plug 'luochen1990/rainbow'  					"括号不同颜色
 Plug 'dense-analysis/ale' 						"语法检查
 Plug 'Yggdroot/LeaderF', {'do': './install.sh'} "模糊搜索
@@ -134,14 +130,21 @@ autocmd VimEnter * call AccentDemo()
 nnoremap <leader>h vy:Leaderf rg -e /Users/Lordon/ path<CR>
 let g:Lf_ReverseOrder = 1
 let g:Lf_ShortcutF = '<C-P>'
+let g:Lf_WorkingDirectoryMode = 'Ac'
+"let g:Lf_WindowPosition = 'right'
+let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
+let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
+let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
+
+let g:Lf_PreviewHorizontalPosition = 'left'
 " Show icons, icons are shown by default
 let g:Lf_ShowDevIcons = 1
 let g:Lf_HideHelp = 1
 let g:Lf_UseCache = 0
 let g:Lf_UseVersionControlTool = 0
 let g:Lf_IgnoreCurrentBufferName = 1
-let g:Lf_WorkingDirectoryMode = 1
+" let g:Lf_WorkingDirectoryMode = 1
 
 """"""""""""""""""""""
 " Plug----nerdtree
@@ -231,6 +234,11 @@ func SetTitle_()
 endfunc 
 
 
+
+""""""""""""""""""""""
+"📖remote PC need to delete this part
+""""""""""""""""""""""
+
 call quickui#menu#reset()
 let g:quickui_color_scheme = 'gruvbox'
 call quickui#menu#install("&File", [
@@ -239,6 +247,8 @@ call quickui#menu#install("&File", [
 		\ [ "--", ],
 			\ [ "&New Bookmark", 'CocCommand bookmark.annotate'],
 			\ [ "&List Bookmark", 'CocList bookmark'],
+			\ ['&Spell %{&spell? "Disable":"Enable"}', 'set spell!', 'Toggle spell check %{&spell? "off" : "on"}'],
+			\ [ "&Creat Tag", '!ctags -R'],
 		\ [ "--", ],
 			\ [ "LeadF &File", 'Leaderf file', 'Open file with leaderf'],
 			\ [ "LeadF &Mru", 'Leaderf mru --regexMode', 'Open recently accessed files'],
@@ -254,7 +264,6 @@ call quickui#menu#install('&Tools', [
 			\ ['Show &Gitcommit', 'CocCommand git.showCommit', ],
 			\ ['Display &Messages', 'call quickui#tools#display_messages()', ],
 			\ ['--',''],
-			\ ['&Spell %{&spell? "Disable":"Enable"}', 'set spell!', 'Toggle spell check %{&spell? "off" : "on"}'],
 			\ ["Relati&ve number %{&relativenumber? 'OFF':'ON'}", 'set relativenumber!'],
 			\ ])
 
@@ -302,16 +311,25 @@ let g:context_menu_k = [
 			\ ['P&ython Doc', 'call quickui#tools#python_help("")', 'python'],
 			\ ]
 
+if has('nvim')
 " display vim messages in the textbox
-function! DisplayMessages()
-    let x = ''
-    redir => x
-    silent! messages
-    redir END
-    let x = substitute(x, '[\n\r]\+\%$', '', 'g')
-    let content = filter(split(x, "\n"), 'v:key != ""')
-    let opts = {"close":"button", "title":"Vim Messages"}
-    call quickui#textbox#open(content, opts)
-endfunc
+	function! DisplayMessages()
+		let x = ''
+		redir => x
+		silent! messages
+		redir END
+		let x = substitute(x, '[\n\r]\+\%$', '', 'g')
+		let content = filter(split(x, "\n"), 'v:key != ""')
+		let opts = {"close":"button", "title":"Vim Messages"}
+		call quickui#textbox#open(content, opts)
+	endfunc
+endif
+"智能缩进
+set smartindent
+set foldmethod=indent
+
+
+
+
 
 

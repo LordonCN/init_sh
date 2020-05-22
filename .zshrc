@@ -59,3 +59,4 @@ alias vim8='/usr/local/Cellar/vim/8.2.0400/bin/vim'
 alias vim='/usr/local/Cellar/neovim/0.4.3/bin/nvim'
 
 
+export PATH="/usr/local/opt/qt/bin:$PATH"
