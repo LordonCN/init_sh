@@ -1,9 +1,9 @@
 """"""""""""""""""""""
 " Author:Lordon 
 " Blog: http://Tcloser.github.io
-" Version: v3.0
-" Update Time: 2020-05-21
-" Details: add the settings of popup leader
+" Version: v3.3
+" Update Time: 2020-05-26
+" Details: add command "+y to systerm copy board
 """"""""""""""""""""""
 "🌟设置leader按键为空格
 let mapleader = "\<space>"
@@ -12,15 +12,25 @@ set autoread
 
 nmap <leader>s :Startify<cr>
 nmap <leader>w :w!<cr>
-nmap <leader>qq :q!<cr> 
+nmap <leader>q :q!<cr> 
+" past the copy content in 0 regester
+nmap 0p "0p
+""""""""""""""""""""""
+"💻copy content to systerm copyboard
+" command: "+yw 或者 
+"visual选中"+y 
+""""""""""""""""""""""
+vmap 0= "+y
+"🌟ve(visual select word) It's to difficult to reach
+nmap <leader>m ve
 " delete one word --learn from book
 " nmap <leader>dd daw 
 " nmap <leader>dc caw 
 " nmap <leader>dp C
-" change buffer tabe
-nmap <leader>n :bn<cr>
+"🌟change buffer tabe
+nmap <leader>n :bn<cr> 
 "🌟打开目录树 y定位到当前目录
-nmap <leader>t :NERDTreeToggle<cr>
+nmap <leader>t :nerdtreetoggle<cr>
 nnoremap <silent> <Leader>y :NERDTreeFind<CR>
 "🌟coc bookmark config
 nmap <leader>b :CocList bookmark<cr>
@@ -68,8 +78,11 @@ set history=100
 set cmdheight=1 
 "vim命令模式tab预选提示
 set wildmenu
-set nowrap "禁止折行
+"禁止折行
+set nowrap 
+
 filetype indent on
+
 set list lcs=tab:>-
 set tabstop=4
 set t_Co=256
