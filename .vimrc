@@ -1,9 +1,9 @@
 """"""""""""""""""""""
 " Author:Lordon 
 " Blog: http://Tcloser.github.io
-" Version: v3.3
+" Version: v3.4
 " Update Time: 2020-05-26
-" Details: add command "+y to systerm copy board
+" Details: add popup terminal plug
 """"""""""""""""""""""
 "🌟设置leader按键为空格
 let mapleader = "\<space>"
@@ -20,17 +20,17 @@ nmap 0p "0p
 " command: "+yw 或者 
 "visual选中"+y 
 """"""""""""""""""""""
-vmap 0= "+y
+vmap -= "+y
 "🌟ve(visual select word) It's to difficult to reach
-nmap <leader>m ve
+"nmap <leader>m ve
+
 " delete one word --learn from book
-" nmap <leader>dd daw 
-" nmap <leader>dc caw 
-" nmap <leader>dp C
+"🌟go to tag
+nmap <leader>g <C-]>
 "🌟change buffer tabe
 nmap <leader>n :bn<cr> 
 "🌟打开目录树 y定位到当前目录
-nmap <leader>t :nerdtreetoggle<cr>
+nmap <leader>t :NERDTreeToggle<cr>
 nnoremap <silent> <Leader>y :NERDTreeFind<CR>
 "🌟coc bookmark config
 nmap <leader>b :CocList bookmark<cr>
@@ -41,7 +41,9 @@ nnoremap <silent><space>r :call quickui#menu#open()<cr>
 "🌟exit  insert model to normal use jj 
 imap jj <Esc>`^
 "快捷生成TODO change todo and to insert mode
-imap <C-t> <!--TODO--> jj7hdwi
+"imap <C-t> <!--TODO--> jj7hdwi
+imap <C-t>m <!--TODO(Lordon):--> jj3hi
+imap <C-t>p # TODO(Lordon):
 """"""""""""""""""""""
 " 设置vim scheme
 """"""""""""""""""""""
@@ -98,9 +100,10 @@ Plug 'mhinz/vim-startify' 						"welcome
 Plug 'tpope/vim-fugitive' 						"Git 插件
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'voldikss/vim-floaterm'
 Plug 'morhetz/gruvbox'							"当前主题很喜欢
 Plug 'luochen1990/rainbow'  					"括号不同颜色
-Plug 'dense-analysis/ale' 						"语法检查
+" Plug 'dense-analysis/ale' 						"语法检查
 Plug 'Yggdroot/LeaderF', {'do': './install.sh'} "模糊搜索
 Plug 'nathanaelkane/vim-indent-guides' 			"智能缩进插件 
 Plug 'skywind3000/asyncrun.vim' 				"F5运行当前程序
@@ -123,14 +126,14 @@ function! AccentDemo()
   for k in keys
     call airline#parts#define_text(k, k)
   endfor
-  call airline#parts#define_accent('N', 'red')
+  call airline#parts#define_accent('N', 'bold')
   call airline#parts#define_accent('E', 'green')
   call airline#parts#define_accent('U', 'blue')
   call airline#parts#define_accent('L', 'purple')
   call airline#parts#define_accent('o', 'orange')
   call airline#parts#define_accent('r', 'purple')
   call airline#parts#define_accent('d', 'bold')
-  call airline#parts#define_accent('o', 'red')
+  call airline#parts#define_accent('o', 'green')
   call airline#parts#define_accent('n', 'italic')
   let g:airline_section_a = airline#section#create(keys)
 endfunction
@@ -337,12 +340,20 @@ if has('nvim')
 		call quickui#textbox#open(content, opts)
 	endfunc
 endif
+
+
 "智能缩进
 set smartindent
 set foldmethod=indent
 
 
 
-
+""""""""""""""""""""""
+"https://github.com/voldikss/vim-floaterm#basic-usage
+" Configuration of floaterm 
+" F7-start a new terminal F8-put the terminal to background
+""""""""""""""""""""""
+let g:floaterm_keymap_new    = '<F7>'
+let g:floaterm_keymap_toggle = '<F8>'
 
 
