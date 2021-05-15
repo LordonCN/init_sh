@@ -24,9 +24,12 @@ vmap -= "+y
 "🌟ve(visual select word) It's to difficult to reach
 "nmap <leader>m ve
 
-" delete one word --learn from book
-"🌟go to tag
-nmap <leader>g <C-]>
+" copy file at right
+nmap <leader>r :vs<cr>
+" fuzzy search in home path
+nmap <leader>f :LeaderfFile /home/wxy/<cr>
+" fuzzy search in now path
+let g:Lf_ShortcutF = '<C-P>'
 "🌟change buffer tabe
 nmap <leader>n :bn<cr> 
 "🌟打开目录树 y定位到当前目录
@@ -36,8 +39,6 @@ nnoremap <silent> <Leader>y :NERDTreeFind<CR>
 nmap <leader>b :CocList bookmark<cr>
 "开新标签
 "nmap <leader>n :tabnew<cr>        
-"开ui导航 
-nnoremap <silent><space>r :call quickui#menu#open()<cr>
 "🌟exit  insert model to normal use jj 
 imap jj <Esc>`^
 "快捷生成TODO change todo and to insert mode
@@ -100,17 +101,9 @@ Plug 'mhinz/vim-startify' 						"welcome
 Plug 'tpope/vim-fugitive' 						"Git 插件
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'voldikss/vim-floaterm'
-Plug 'morhetz/gruvbox'							"当前主题很喜欢
 Plug 'luochen1990/rainbow'  					"括号不同颜色
-" Plug 'dense-analysis/ale' 						"语法检查
-Plug 'Yggdroot/LeaderF', {'do': './install.sh'} "模糊搜索
-Plug 'nathanaelkane/vim-indent-guides' 			"智能缩进插件 
-Plug 'skywind3000/asyncrun.vim' 				"F5运行当前程序
 Plug 'itchyny/vim-cursorword' 					"检测同名单词用下划线标出
-Plug 'skywind3000/vim-quickui'					"添加ui 两下空格键 vim8.2
-Plug 'neoclide/coc.nvim', {'branch': 'release'} "补全指令插件 移步好用
-Plug 'iamcco/markdown-preview.vim' 				"markdown prewiew ontime
+Plug 'Yggdroot/LeaderF',{'do':':LeaderfInstallCExtension'}
 call plug#end()
 
 
@@ -139,37 +132,6 @@ function! AccentDemo()
 endfunction
 autocmd VimEnter * call AccentDemo()
 
-
-""""""""""""""""""""""
-" Plug----leaderF
-""""""""""""""""""""""
-nnoremap <leader>h vy:Leaderf rg -e /Users/Lordon/ path<CR>
-let g:Lf_ReverseOrder = 1
-let g:Lf_ShortcutF = '<C-P>'
-let g:Lf_WorkingDirectoryMode = 'Ac'
-"let g:Lf_WindowPosition = 'right'
-let g:Lf_WindowPosition = 'popup'
-let g:Lf_PreviewInPopup = 1
-let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
-let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
-
-let g:Lf_PreviewHorizontalPosition = 'left'
-" Show icons, icons are shown by default
-let g:Lf_ShowDevIcons = 1
-let g:Lf_HideHelp = 1
-let g:Lf_UseCache = 0
-let g:Lf_UseVersionControlTool = 0
-let g:Lf_IgnoreCurrentBufferName = 1
-" let g:Lf_WorkingDirectoryMode = 1
-
-""""""""""""""""""""""
-" Plug----nerdtree
-" nerdtree settings leader+f :search for files
-""""""""""""""""""""""
-nnoremap <leader>f :nerdtreefind<cr>
-let nerdtreewinsize=30
-let g:NERDTreeChDirMode = 2
-
 """"""""""""""""""""""
 " Plug-----缩进可视化插件 Indent Guides
 " 从第二层开始可视化显示缩进
@@ -179,181 +141,5 @@ let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 " 快捷键 i 开/关缩进可视化
 nmap <silent> <Leader>i <Plug>IndentGuidesToggle
-
-
-""""""""""""""""""""""
-"Plug asyncrun
-"Quickly Run
-""""""""""""""""""""""
-" 任务结束时候响铃提醒
-let g:asyncrun_bell = 1
-
-
-
-"F5运行当前程序
-map <F5> :call CompileRun()<CR>
-    func! CompileRun()
-	exec "w"
-	if &filetype == 'sh'
-        "    :!clear && time bash %
-		exec "AsyncRun bash %"
-		exec "copen"
-	elseif &filetype == 'python'
-		exec "AsyncRun -raw python %"
-		exec "copen"
-	elseif &filetype == 'cpp'
-		exec "!g++ % -o %<"
-		exec "!./%<"
-
-	endif
-	endfunc
-
-
-" source的时候这段会报错 不过没关系 
-filetype plugin indent on 
-"新建.c,.h,.sh,.java文件，自动插入文件头 
-autocmd BufNewFile *.cpp,*.sh exec ":call SetTitle_()" 
-""定义函数SetTitle，自动插入文件头 
-func SetTitle_() 
-    "如果文件类型为.sh文件 
-    if &filetype == 'sh' 
-        call setline(1,"\#########################################################################") 
-        call append(line("."), "\# File Name: ".expand("%")) 
-        call append(line(".")+1, "\# Author: Lordon") 
-        call append(line(".")+2, "\# mail: xunjtech@gmail.com") 
-        call append(line(".")+3, "\# Created Time: ".strftime("%c")) 
-        call append(line(".")+4, "\#########################################################################") 
-        call append(line(".")+6, "") 
-    endif
-    if &filetype == 'cpp'
-        call setline(1, "/*************************************************************************")  
-        call setline(2, "\ @Author: lordon")  
-        call setline(3, "\ @Created Time : ".strftime("%c"))  
-        call setline(4, "\ @Description:")  
-        call setline(5, " ************************************************************************/")  
-        call setline(6,"")  
-        call setline(7, "#include<iostream>")
-        call setline(8, "#include<cmath>")
-        call setline(9, "#include<vector>")
-        call setline(10,"#include<string>")
-        call setline(11,"#include<algorithm>")
-        call setline(12,"")  
-        call setline(13,"using namespace std;")
-        call setline(14,"")  
-        call setline(15,"int main(){")  
-        call setline(16,"")  
-        call setline(17,"return 0;")  
-        call setline(18,"}")  
-    endif
-   "新建文件后，自动定位到文件末尾
-   autocmd BufNewFile * normal G
-endfunc 
-
-
-
-""""""""""""""""""""""
-"📖remote PC need to delete this part
-""""""""""""""""""""""
-
-call quickui#menu#reset()
-let g:quickui_color_scheme = 'gruvbox'
-call quickui#menu#install("&File", [
-			\ [ "&Open/NewFile", 'call feedkeys(":tabe ")'],
-			\ [ "&Save\t(:w)", 'write'],
-		\ [ "--", ],
-			\ [ "&New Bookmark", 'CocCommand bookmark.annotate'],
-			\ [ "&List Bookmark", 'CocList bookmark'],
-			\ ['&Spell %{&spell? "Disable":"Enable"}', 'set spell!', 'Toggle spell check %{&spell? "off" : "on"}'],
-			\ [ "&Creat Tag", '!ctags -R'],
-		\ [ "--", ],
-			\ [ "LeadF &File", 'Leaderf file', 'Open file with leaderf'],
-			\ [ "LeadF &Mru", 'Leaderf mru --regexMode', 'Open recently accessed files'],
-			\ [ "LeadF &Buffer", 'Leaderf buffer', 'List current buffers in leaderf'],
-			\ [ "--", ],
-			\ [ "E&xit", 'qa' ],
-			\ ])
-
-call quickui#menu#install('&Tools', [
-			\ ['List &Buffer', 'call quickui#tools#list_buffer("tabe")', ],
-			\ ['New &Buffer', 'call quickui#tools#buffer_switch("tabe")', ],
-			\ ['--',''],
-			\ ['Show &Gitcommit', 'CocCommand git.showCommit', ],
-			\ ['Display &Messages', 'call quickui#tools#display_messages()', ],
-			\ ['--',''],
-			\ ["Relati&ve number %{&relativenumber? 'OFF':'ON'}", 'set relativenumber!'],
-			\ ])
-
-call quickui#menu#install('&Plugin', [
-			\ ["&NERDTree\t<space>t", 'NERDTreeToggle', 'toggle nerdtree'],
-			\ ["-"],
-			\ ['&Source vimrc','source ~/.vimrc'],
-			\ ['&PlugInstall','PlugInstall'],
-			\ ["-"],
-			\ ["Plugin &Update", "PlugUpdate", "Update plugin"],
-			\ ])
-
-call quickui#menu#install('Help (&?)', [
-			\ ["&Index", 'tab help index', ''],
-			\ ['Ti&ps', 'tab help tips', ''],
-			\ ['--',''],
-			\ ["&Tutorial", 'tab help tutor', ''],
-			\ ['&Quick Reference', 'tab help quickref', ''],
-			\ ['&Summary', 'tab help summary', ''],
-			\ ['--',''],
-			\ ['&Vim Script', 'tab help eval', ''],
-			\ ['&Function List', 'tab help function-list', ''],
-			\ ['&Dash Help', 'call asclib#utils#dash_ft(&ft, expand("<cword>"))'],
-			\ ], 10000)
-"----------------------------------------------------------------------
-" context menu
-"----------------------------------------------------------------------
-let g:context_menu_k = [
-			\ ["&Peek Definition\tAlt+;", 'call quickui#tools#preview_tag("")'],
-			\ ["S&earch in Project\t\\cx", 'exec "silent! GrepCode! " . expand("<cword>")'],
-			\ [ "--", ],
-			\ [ "Find &Definition\t\\cg", 'call MenuHelp_Fscope("g")', 'GNU Global search g'],
-			\ [ "Find &Symbol\t\\cs", 'call MenuHelp_Fscope("s")', 'GNU Gloal search s'],
-			\ [ "Find &Called by\t\\cd", 'call MenuHelp_Fscope("d")', 'GNU Global search d'],
-			\ [ "Find C&alling\t\\cc", 'call MenuHelp_Fscope("c")', 'GNU Global search c'],
-			\ [ "Find &From Ctags\t\\cz", 'call MenuHelp_Fscope("z")', 'GNU Global search c'],
-			\ [ "--", ],
-			\ [ "Goto D&efinition\t(YCM)", 'YcmCompleter GoToDefinitionElseDeclaration'],
-			\ [ "Goto &References\t(YCM)", 'YcmCompleter GoToReferences'],
-			\ [ "Get D&oc\t(YCM)", 'YcmCompleter GetDoc'],
-			\ [ "Get &Type\t(YCM)", 'YcmCompleter GetTypeImprecise'],
-			\ [ "--", ],
-			\ ['Dash &Help', 'call asclib#utils#dash_ft(&ft, expand("<cword>"))'],
-			\ ['Cpp&man', 'exec "Cppman " . expand("<cword>")', '', 'c,cpp'],
-			\ ['P&ython Doc', 'call quickui#tools#python_help("")', 'python'],
-			\ ]
-
-if has('nvim')
-" display vim messages in the textbox
-	function! DisplayMessages()
-		let x = ''
-		redir => x
-		silent! messages
-		redir END
-		let x = substitute(x, '[\n\r]\+\%$', '', 'g')
-		let content = filter(split(x, "\n"), 'v:key != ""')
-		let opts = {"close":"button", "title":"Vim Messages"}
-		call quickui#textbox#open(content, opts)
-	endfunc
-endif
-
-
-"智能缩进
-set smartindent
-set foldmethod=indent
-
-
-
-""""""""""""""""""""""
-"https://github.com/voldikss/vim-floaterm#basic-usage
-" Configuration of floaterm 
-" F7-start a new terminal F8-put the terminal to background
-""""""""""""""""""""""
-let g:floaterm_keymap_new    = '<F7>'
-let g:floaterm_keymap_toggle = '<F8>'
 
 
